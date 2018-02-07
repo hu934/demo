@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		  <style type="text/css">
+        .mui-content{margin-top: 12px;}
+        .mui-btn{width: 80px;}
+    </style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-arrowleft" style="color: #999;"></a>
+			<h1 class="mui-title">登录</h1>
+		</header>
+		<div class="mui-content">
+
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<input type="text" class="mui-input-clear" placeholder="请输入用户名" id="username">
+				</div>
+				<div class="mui-input-row">
+					<input type="password" class="mui-input-password" placeholder="请输入密码" id="password">
+				</div>
+			</form>
+			<div class="mui-content-padded" align="center">
+				<button type="button" class="mui-btn mui-btn-success" id="login">确认</button>
+			    <button type="button" class="mui-btn mui-btn-green" id="reg">注册</button>
+			</div>
+			<p>忘记密码</p>
+			<div>
+				<span>还没有账号？</span>
+				<button type="button" class="mui-btn mui-btn-success mui-btn-outlined" id="">手机注册</button>
+			</div>
+		</div>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			 mui.plusReady(function(){
+            var reg=document.getElementById("reg");
+            var login=document.getElementById("login");
+            reg.addEventListener('tap',function(){
+                mui.openWindow({
+                    url:'reg.html',
+                    id:'reg'
+                })
+            });
+            login.addEventListener('tap',function(){
+                var username=document.getElementById("username");
+                var password=document.getElementById("password");
+                if(username.value.length==0){
+                    plus.ui.toast("用户名不能为空");
+                    return;
+                }
+                if(password.value.length==0){
+                    plus.ui.toast("密码不能为空");
+                    return;
+                }
+                mui.ajax('reg.html',{
+                    data:{
+                        username:username.value,
+                        password:password.value
+                    },
+                    dataType:'json',
+                    type:'POST',
+                    timeout:10000,
+                    success:function(data){
+                        //{"reslut":1}
+                        if(data.result==1){
+                            //登录成功
+                            plus.ui.toast("登录成功");
+                            mui.openWindow({
+                                url:'list.html',
+                                id:'list'
+                            })
+                        }else{
+                            //登录失败
+                            plus.ui.toast(data.data);
+                        }
+                    },
+                    error:function(){
+                    }
+                })
+            })
+
+        })
+		</script>
+	</body>
+
+</html>
