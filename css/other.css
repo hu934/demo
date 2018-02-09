@@ -1,0 +1,15 @@
+.mui-input-group .mui-button-row.login-div-btn{
+    height: 60px;
+    padding-top: 10px;
+}
+.login-btn{
+    height: 40px;
+    width: 80%;
+    background-color: #fb0628;
+    border-color: #fb0628;
+}
+.mui-btn-blue.mui-active:enabled,.mui-btn-blue:enabled:active,.mui-btn-primary.mui-active:enabled,.mui-btn-primary:enabled:active,input[type=submit].mui-active:enabled,input[type=submit]:enabled:active {
+    color: #fff;
+    border: 1px solid #fb0628;
+    background-color: #fb0628
+}
