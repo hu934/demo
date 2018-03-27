@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/global.css" />
+<style>
+.banner-cotent{
+    width: 1200px;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+.banner-img{
+    position: absolute;
+    z-index: 1;
+    width: 6000px;
+    height: 400px;
+}
+.banner-img img{
+    float: left;
+    width: 1200px;
+    height: 400px;
+}
+.banner-btn{
+    position: absolute;
+    height: 25px;
+    z-index: 2;
+    left: 50%;
+    bottom: 5px;
+    margin-left: -30px; 
+}
+.banner-btn span{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 15px;
+    background: #fff;
+    color: #fff;
+    cursor: pointer;
+}
+.banner-btn .on{
+    background: red;
+    color:red;
+}
+.banner-left,.banner-right{
+    display: none;
+    z-index: 2;
+    position: absolute;
+    height: 30px;
+    top: 50%;
+    width: 30px;
+    margin-top: -30px;
+    font-size: 24px;  
+    cursor:pointer;
+}
+.banner-cotent:hover .banner-left ,.banner-cotent:hover .banner-right {
+    display: block;
+ }
+.banner-left{
+    left: 0;
+}
+.banner-right{
+    right: 0;
+}
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div class="banner-cotent" id="content">   
+            <div class="banner-img" id="listimg" style="left: -1200px;">
+                <img src="" alt="1" />
+                <img src="./img/jinglao_banner.png" alt="1" />
+                <img src="./img/juanzhu_banner2.png" alt="2" />
+                <img src="./img/kaifang_banner4.png" alt="3" />
+                <img src="" alt="1" />
+            </div>
+            <div class="banner-btn" id="btn">
+                <span class="on">1</span>
+                <span>2</span>
+                <span>3</span>
+            </div>
+            <a href="javascript:;" class="banner-left" id="prev">《</a>
+            <a href="javascript:;" class="banner-right" id="next">》</a>
+        </div>
+    </div>
+    <script>
+    var container = document.getElementById('content');
+    var list = document.getElementById('listimg');
+    var buttons = document.getElementById('btn').getElementsByTagName('span');
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    var index = 1;
+    var timer;
+    function animate(offset) {
+        //获取的是style.left，是相对左边获取距离，所以第一张图后style.left都为负值，
+        //且style.left获取的是字符串，需要用parseInt()取整转化为数字。
+        var newLeft = parseInt(list.style.left) + offset;
+        list.style.left = newLeft + 'px';
+        if(newLeft > -1200){
+            list.style.left=-3600+'px'
+        }
+        if(newLeft < -3600){
+            list.style.left=-1200+'px'
+        }
+    }
+    function play(){
+        timer=setInterval(function(){
+            next.onclick();
+        },2000)
+    }
+    function stop(){
+        clearInterval(timer);
+    }
+    function buttonsShow(){
+        for(var i=0;i<buttons.length;i++){
+            if(buttons[i].className=="on"){
+                buttons[i].className="";
+            }
+        }
+        buttons[index-1].className="on";
+    }
+    prev.onclick=function(){
+        index-=1;
+        if(index<1){
+            index=3
+        }
+        buttonsShow();
+        animate(1200);
+    };
+    next.onclick=function(){
+        index+=1;
+        if(index>3){
+            index=1
+        }
+        animate(-1200);
+        buttonsShow();
+    };
+    for(var i=0;i<buttons.length;i++){
+        (function(i){
+            buttons[i].onclick=function(){
+                var clickIndex=parseInt(this.getAttribute('index'));
+                var offset=1200*(index-clickIndex);
+                animate(offset);
+                index=clickIndex;
+                buttonsShow();
+            }
+        })(i)
+    }
+    container.onmouseover=stop;
+    container.onmouseout=play;
+    play();
+    </script>
+</body>
+</html>

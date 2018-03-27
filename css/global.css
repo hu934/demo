@@ -1,0 +1,86 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+	margin:0;
+	padding:0;
+}
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+img,
+strong,
+sub,
+sup,
+tt,
+dd,
+dl,
+dt,
+form,
+label,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+ul,
+li,
+p,
+a {
+	margin: 0;
+	padding: 0;
+}
+html {
+	overflow-y: scroll;
+	overflow-x:hidden;
+}
+button {
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	background-color: transparent;
+}
+input,
+select,
+textarea {
+	vertical-align: middle;
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+img {
+	border: 0;
+	vertical-align:middle;
+}
+ul,
+li {
+	list-style-type: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a:link,
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
